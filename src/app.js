@@ -1,7 +1,53 @@
-const express = require('express')
+const express = require('express');
+
+const userRouter = require('./router/user_router');
 
 //Create express intance
 const app =express();
+
+function demo_middleware(err,req, res, next){
+    //1.Error
+    //2.app function, give the administration--next
+    //3.response-end response
+}
+
+//middleware for load static
+app.use(express.static('static',{
+    extensions:['html','htm']
+}))
+
+app.use('/user', userRouter)
+
+app.get('/index', function(req, res){
+     res.sendFile(path.join(static + '/index.html'));
+})
+
+app.listen(3000,()=>{
+  console.log('server successfully created!')
+})
+
+// function valid_name_middleware(req, res, next){
+//     let{name} = req.query;
+//     if(!name || !name.length){
+//         res.json({
+//             message: 'Need name param'
+//         })
+//     }else{
+//          next();
+//     }
+// }
+// //1.
+// app.all('*', valid_name_middleware)
+//
+// //2.
+// app.get('/test', (req, res)=>{
+//     res.json({
+//         message:'test'
+//     })
+// })
+
+
+
 
 // app.use((req,res)=>{
 //   res.json({
@@ -9,21 +55,35 @@ const app =express();
 //   })
 // })
 
-app.get('/name/:age', (req,res)=>{
-  let {age} = req.params;
-  res.json({
-      name:'tom',
-      age
-  })
-})
+//By post/put/delete/update
+// app.get('/name/:age', (req,res)=>{
+//   let {age} = req.params;
+//   res.json({
+//       name:'tom',
+//       age
+//   })
+// })
+//
+// app.post('/name', (req, res)=>{
+//   res.send('tom post')
+// })
+//
+// //By URI
+// app.get('/user/byname', (req,res)=>{
+//     let name = req.query;
+//     res.json({
+//         name
+//     })
+// })
+//
+// app.get('/user/byid', (req,res)=>{
+//     let name = req.query;
+//     res.json({
+//         id
+//     })
+// })
 
-app.post('/name', (req, res)=>{
-  res.send('tom post')
-})
 
-app.listen(3000,()=>{
-  console.log('server successfully created!')
-})
 
 // const http = require('http');
 //
