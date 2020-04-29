@@ -1,19 +1,46 @@
-const http = require('http');
+const express = require('express')
 
-const hostname = '127.0.0.1';
-const port = 3000;
+//Create express intance
+const app =express();
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
-});
+// app.use((req,res)=>{
+//   res.json({
+//       name:"app123"
+//   })
+// })
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+app.get('/name/:age', (req,res)=>{
+  let {age} = req.params;
+  res.json({
+      name:'tom',
+      age
+  })
+})
 
-var DEBUG=require('debug')('http')
+app.post('/name', (req, res)=>{
+  res.send('tom post')
+})
+
+app.listen(3000,()=>{
+  console.log('server successfully created!')
+})
+
+// const http = require('http');
+//
+// const hostname = '127.0.0.1';
+// const port = 3000;
+//
+// const server = http.createServer((req, res) => {
+//   res.statusCode = 200;
+//   res.setHeader('Content-Type', 'text/plain');
+//   res.end('Hello World');
+// });
+//
+// server.listen(port, hostname, () => {
+//   console.log(`Server running at http://${hostname}:${port}/`);
+// });
+//
+// var DEBUG=require('debug')('http')
 
 // setup nodemon
 //1.npm install nodemon -D
